@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.malli.labs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+sourceSets.main.java.srcDirs = ['src']
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation group:'com.h2database',name:'h2'
+    runtime 'com.h2database:h2'
+    //implementation group:'org.springdoc',name:'springdoc-openapi-ui',version:'1.2.27'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+task {
+    mainClassName = "com.malli.labs.Application"
+}
+test {
+    useJUnitPlatform()
+}
