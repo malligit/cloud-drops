@@ -1,8 +1,10 @@
 package com.malli.labs.controllers;
 
 import com.malli.labs.models.DataModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.malli.labs.jpa.UserRepository;
+import com.malli.labs.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +13,8 @@ import java.util.List;
 
 @RestController
 public class TestRestController {
-
+    @Autowired
+    private UserRepository userRepository;
     @GetMapping("/get-user")
     public List<DataModel> getUser() {
         System.out.println("get-user API called");
@@ -24,8 +27,22 @@ public class TestRestController {
         return users;
     }
 
+    @GetMapping("/db-all-users")
+    public @ResponseBody Iterable<User> getAllDBUsers() {
+              return userRepository.findAll();
+    }
+
+    @PostMapping("/add-db-user")
+    public User addDBUser(@RequestBody User user) {
+        userRepository.save(user);
+        System.out.println("User Added succesfully");
+
+        return user;
+    }
+
     @GetMapping("/msg")
     public String getMsg() {
         return "Malli";
     }
+
 }
