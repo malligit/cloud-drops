@@ -1,0 +1,10 @@
+application:
+  providers:
+    - name: provider1
+      url: http://localhost:8081/v1/api/account/validate
+    - name: provider2
+      url: http://localhost:8082/v2/api/account/validate
+    - name: provider3
+      url: http://localhost:8083/v3/api/account/validate
+    - name: provider4
+      url: http://localhost:8084/v3/api/account/validate  
