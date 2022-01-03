@@ -1,0 +1,38 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  liquibase:
+    change-log: classpath:db/changelog-master.xml
+    default-schema:
+    drop-first: false
+    contexts: crdb
+    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://free-tier4.aws-us-west-2.cockroachlabs.cloud:26257/wise-goat-1776.defaultdb?ssl=true&sslmode=verify-full&sslrootcert=C:\\Tools\\cockroach-v21.2.3\\.postgresql\\root.crt
+    driver-class-name: org.postgresql.Driver
+    username:
+    password: 
+    hikari:
+      maximum-pool-size: 4
+      connection-init-sql: SELECT 1
+
+  jpa:
+    open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: conditions,env,info,health,httptrace,metrics,threaddump,shutdown,configprops,liquibase
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+server:
+  port: 9090
